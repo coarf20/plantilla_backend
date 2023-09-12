@@ -1,27 +1,32 @@
-package com.coarf.plantilla_backend.model.entity;
+package com.coarf.plantilla_backend.infrastructure.adapters.out.database.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "plantillas")
+@Table
 @Data
-public class Plantilla implements Serializable {
+public class PlantillaEntity implements Serializable {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column(nullable = false, columnDefinition = "JSON")
     private String contenido;  // Almacenará el contenido en formato JSON
 
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     @Column(name = "fecha_creacion", nullable = false)
     private Date fechaCreacion;
 
